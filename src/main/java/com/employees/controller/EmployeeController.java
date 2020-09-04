@@ -8,6 +8,7 @@ import org.apache.http.client.utils.URIBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,12 +35,16 @@ public class EmployeeController {
 
 	@RequestMapping(value = RestConstants.GET_ALL_EMPLOYEES, method = RequestMethod.GET)
 	public @ResponseBody EmployeeDetailsBaseMultiResponse getAll(
+			@RequestParam(name = "name", required = false, defaultValue = "") String name,
+			@RequestParam(name = "status", required = false, defaultValue = "") String status,
 			@RequestParam(name = "limit", required = false, defaultValue = "10") Integer limit,
 			@RequestParam(name = "offset", required = false, defaultValue = "0") Integer offset) throws Exception {
 		LOGGER.info("*****Fetching getAllData");
 
 		List<EmployeeDetails> allEmployeeDetailsList = pservice.getAll();
 		List<EmployeeDetails> employeeDetailsList = allEmployeeDetailsList.stream()
+				.filter(e -> StringUtils.isEmpty(name) || e.getName().contains(name))
+				.filter(e -> StringUtils.isEmpty(name) || status.equalsIgnoreCase(e.getStatus()))
 				.skip(offset)
 				.limit(limit)
 				.collect(Collectors.toList());
