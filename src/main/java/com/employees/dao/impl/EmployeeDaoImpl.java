@@ -1,12 +1,9 @@
 package com.employees.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.IntStream;
 
-import org.assertj.core.util.Arrays;
 import org.springframework.stereotype.Repository;
 
 import com.employees.dao.EmployeeDao;
@@ -31,14 +28,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public List<EmployeeDetails> getAll() {
-
 		return serviceData;
-	}
-
-	@Override
-	public EmployeeDetails getSingle(int id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

@@ -39,7 +39,9 @@ public class EmployeeController {
 		LOGGER.info("*****Fetching getAllData");
 
 		List<EmployeeDetails> allEmployeeDetailsList = pservice.getAll();
-		List<EmployeeDetails> employeeDetailsList = allEmployeeDetailsList.stream().skip(offset * limit).limit(limit)
+		List<EmployeeDetails> employeeDetailsList = allEmployeeDetailsList.stream()
+				.skip(offset)
+				.limit(limit)
 				.collect(Collectors.toList());
 
 		URIBuilder uriBuilder = new URIBuilder(loadBalancerAddress + RestConstants.GET_ALL_EMPLOYEES)
@@ -67,13 +69,18 @@ public class EmployeeController {
 
 		String url = loadBalancerAddress + RestConstants.GET_ALL_EMPLOYEES + "?offset=" + offset + "&limit=" + limit;
 
-		return EmployeeDetailsBaseMultiResponse.builder().withPageInfo(pagingInfo).withUri(url)
-				.withItems(employeeDetailsList.stream().map(employeeDetailsBaseResponseMapper).collect(Collectors.toList())).build();
+		return EmployeeDetailsBaseMultiResponse.builder()
+				.withPageInfo(pagingInfo)
+				.withUri(url)
+				.withItems(employeeDetailsList.stream()
+						.map(employeeDetailsBaseResponseMapper)
+						.collect(Collectors.toList()))
+				.build();
 	}
 
 	@RequestMapping(value = RestConstants.GET_SINNGLE_EMPLOYEE, method = RequestMethod.GET)
 	public @ResponseBody EmployeeDetailsResponse getSingle(@PathVariable("id") int id) {
-		LOGGER.info("Start Get Data By ID = " + id);
+		LOGGER.info("getSingle by id : " + id);
 		EmployeeDetails employeeDetails = pservice.getSingle(id);
 		return employeeDetailsBaseResponseMapper.apply(employeeDetails);
 	}

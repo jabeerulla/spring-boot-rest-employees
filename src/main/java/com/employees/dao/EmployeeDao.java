@@ -6,6 +6,4 @@ import com.employees.model.EmployeeDetails;
 
 public interface EmployeeDao {
 	List<EmployeeDetails> getAll();
-
-	EmployeeDetails getSingle(int id);
 }
