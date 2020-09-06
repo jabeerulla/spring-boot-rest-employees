@@ -11,5 +11,7 @@ public class RestConstants {
 	public static final String NAME = "name";
 	public static final String STATUS = "status";
 	public static final String GET_ALL_EMPLOYEES = "/employees";
-	public static final String GET_SINNGLE_EMPLOYEE = "/employees/{id}";
+	public static final String GET_SINGLE_EMPLOYEE = "/employees/{id}";
+	public static final String POST_EMPLOYEE = "/employees";
+	public static final String PUT_EMPLOYEE = "/employees/{id}";
 }

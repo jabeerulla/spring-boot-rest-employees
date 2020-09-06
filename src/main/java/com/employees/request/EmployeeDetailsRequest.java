@@ -1,4 +1,4 @@
-package com.employees.response;
+package com.employees.request;
 
 import static com.employees.constants.RestConstants.ID;
 import static com.employees.constants.RestConstants.NAME;
@@ -14,14 +14,14 @@ import com.google.common.base.MoreObjects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ ID, NAME, STATUS })
-public class EmployeeDetailsResponse {
+public class EmployeeDetailsRequest {
 
 	private int id;
 	private String name;
 	private String status;
 
 	@JsonCreator
-	public EmployeeDetailsResponse(@JsonProperty(ID) int id, @JsonProperty(NAME) String name,
+	public EmployeeDetailsRequest(@JsonProperty(ID) int id, @JsonProperty(NAME) String name,
 			@JsonProperty(STATUS) String status) {
 		this.id = id;
 		this.name = name;
@@ -88,8 +88,8 @@ public class EmployeeDetailsResponse {
 			return this;
 		}
 
-		public EmployeeDetailsResponse build() {
-			EmployeeDetailsResponse employeeDetailsResponse = new EmployeeDetailsResponse(id, name, status);
+		public EmployeeDetailsRequest build() {
+			EmployeeDetailsRequest employeeDetailsResponse = new EmployeeDetailsRequest(id, name, status);
 			return employeeDetailsResponse;
 		}
 	}

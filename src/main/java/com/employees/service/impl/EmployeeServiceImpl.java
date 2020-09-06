@@ -33,4 +33,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 		throw new NotFoundException("Employee with id not found : " + id);
 	}
 
+	public EmployeeDetails create(EmployeeDetails request) {
+		return employeeDao.create(request);
+	}
+
+	@Override
+	public EmployeeDetails update(int id, EmployeeDetails request) {
+		EmployeeDetails e = getSingle(id);
+		e.setName(request.getName() != null ? request.getName() : e.getName());
+		e.setStatus(request.getStatus() != null ? request.getStatus() : e.getStatus());
+		return e;
+	}
+
+	@Override
+	public EmployeeDetails delete(int id) {
+		EmployeeDetails e = getSingle(id);
+		employeeDao.delete(e);
+		return e;
+	}
 }
