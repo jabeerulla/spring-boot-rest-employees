@@ -1,16 +1,36 @@
-# spring-boot-rest-employees
-Spring boot rest example
+# Spring boot rest API samples
+* Spring boot rest example with CRUD operations
 
-# Example URL's
-1. GET http://localhost:8083/employees
-2. GET http://localhost:8083/employees/1
-3. POST http://localhost:8083/employees
-{
-    "name": "New Employee",
+### Example URL's
+* Get all employees  __GET__ http://localhost:8083/employees
+```
+curl --location --request GET 'http://localhost:8083/employees'
+```
+* Get employee by id : __GET__ http://localhost:8083/employees/{id}
+```
+curl --location --request GET 'http://localhost:8083/employees/1'
+```
+* Create employee : __POST__ http://localhost:8083/employees
+```
+curl --location --request POST 'http://localhost:8083/employees' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Employee 51",
     "status": "Active"
-}
-4. PUT http://localhost:8083/employees/1
-{
+}'
+```
+
+* Update employee : __PUT__ http://localhost:8083/employees/{id}
+```
+curl --location --request PUT 'http://localhost:8083/employees/1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Employee 1 Updated",
     "status": "Inactive"
-}
-4. DELETE http://localhost:8083/employees/1
+}'
+```
+* Delete employee : __DELETE__ http://localhost:8083/employees/{id}
+```
+curl --location --request DELETE 'http://localhost:8083/employees/1' \
+--data-raw ''
+```
